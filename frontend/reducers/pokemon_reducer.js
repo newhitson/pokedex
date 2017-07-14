@@ -13,7 +13,10 @@ const pokemonReducer = (state = defaultState, action) =>{
     console.log(action.pokemon);
       return Object.assign({}, state, {entities: action.pokemon});
     case RECEIVE_SINGLE_POKEMON:
-      return Object.assign({}, state, {currentPoke: action.pokemon.poke.id});
+      let newState = Object.assign({}, state);
+      newState.entities[action.pokemon.poke.id] = action.pokemon.poke;
+      newState.currentPoke = action.pokemon.poke.id;
+      return newState;
     default:
       return state;
   }
